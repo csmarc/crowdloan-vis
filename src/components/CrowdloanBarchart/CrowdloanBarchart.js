@@ -15,7 +15,7 @@ export default function CrowdloanBarchart() {
       <BarChart
         width={500}
         height={300}
-        data={crowdloanInfo.data}
+        data={crowdloanInfo}
         margin={{
           top: 20,
           right: 30,
@@ -24,7 +24,7 @@ export default function CrowdloanBarchart() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="id" />
         <YAxis />
         <Tooltip />
         <Legend />
