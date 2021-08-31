@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 
 export default function CrowdloanBarchart() {
   const [crowdloanInfo, setCrowdloanInfo] = useState([]);
-
+  const YLIM = 250000;
   useEffect(() => {
     getCrowdloanData().then(data => setCrowdloanInfo(data));
   }, []);
@@ -12,24 +12,26 @@ export default function CrowdloanBarchart() {
   console.log(crowdloanInfo);
   return (
     <div className="App">
+      <h4 align="left">YLim cutoff: {YLIM}</h4>
       <BarChart
-        width={500}
-        height={300}
+        width={800}
+        height={600}
         data={crowdloanInfo}
         margin={{
           top: 20,
-          right: 30,
-          left: 20,
-          bottom: 5,
+          right: 50,
+          left: 50,
+          bottom: 200,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="id" />
-        <YAxis />
+        <XAxis dataKey="paraName" angle={-45} textAnchor="end" interval={0} />
+        {/* <YAxis scale="log" domain={[0.01, 'auto']} allowDataOverflow /> */}
+        <YAxis type="number" domain={[0, YLIM]} allowDataOverflow />
         <Tooltip />
-        <Legend />
+        <Legend layout="horizontal" verticalAlign="top" align="center" />
         <Bar dataKey="raised" stackId="a" fill="#8884d8" />
-        <Bar dataKey="remaining" stackId="a" fill="#82ca9d" />
+        <Bar dataKey="collectable" stackId="a" fill="#82ca9d" />
       </BarChart>
     </div>
   );
